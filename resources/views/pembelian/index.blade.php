@@ -9,6 +9,9 @@
 @section('content')
 <a href="{{route('pembelian.create')}}" class="btn btn-primary"><i class='bx bx-plus'></i> Tambah</a>
 <div class="card shadow mt-2">
+    <div class="card-header" style="display: flex; justify-content: center;">
+        <h4 class="card-title">Pembelian Barang</h4>
+    </div>
     <div class="card-body">
         @include('includes.flash')
         <table id="example" class="display" style="width:100%">
@@ -24,16 +27,16 @@
             </thead>
             <tbody>
                 @if (count($beli))
-                    @foreach ($beli as $key => $belis)
-                    <tr>
-                        <td>{{$key+1}}</td>
-                        <td>{{$belis->tanggal}}</td>
-                        <td>{{$belis->barang->nama_barang}}</td>
-                        <td>{{$belis->jumlah}}</td>
-                        <td>{{"Rp. ".number_format($belis->harga,0,".",".")}}</td>
-                        <td>{{"Rp. ".number_format($belis->total_harga,0,".",".")}}</td>
-                    </tr>
-                    @endforeach
+                @foreach ($beli as $key => $belis)
+                <tr>
+                    <td>{{$key+1}}</td>
+                    <td>{{$belis->tanggal}}</td>
+                    <td>{{$belis->barang->nama_barang}}</td>
+                    <td>{{$belis->jumlah}}</td>
+                    <td>{{"Rp. ".number_format($belis->harga,0,".",".")}}</td>
+                    <td>{{"Rp. ".number_format($belis->total_harga,0,".",".")}}</td>
+                </tr>
+                @endforeach
                 @endif
             </tbody>
         </table>
@@ -41,21 +44,19 @@
 </div>
 @push('scripts')
 <script>
-$(document).ready(function() {
-    var table = $('#example').DataTable( {
-        responsive:true,
-        lengthChange: false,
-        buttons: [
-            {
+    $(document).ready(function() {
+        var table = $('#example').DataTable({
+            responsive: true,
+            lengthChange: false,
+            buttons: [{
                 extend: 'excel',
-                split: [ 'pdf'],
-            }
-        ]
-    } );
- 
-    table.buttons().container()
-        .appendTo( '#example_wrapper .col-md-6:eq(0)' );
-} );
+                split: ['pdf'],
+            }]
+        });
+
+        table.buttons().container()
+            .appendTo('#example_wrapper .col-md-6:eq(0)');
+    });
 </script>
 @endpush
 @include ('includes.scripts')

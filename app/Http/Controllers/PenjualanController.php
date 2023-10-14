@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Penjualan;
 use App\Models\Barang;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use Yajra\DataTables\Html\Editor\Fields\Boolean;
 
 class PenjualanController extends Controller
 {
@@ -13,11 +15,14 @@ class PenjualanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public $state = true;
     public function index()
     {
-        $data = Penjualan::with('barang')->get();
+        // $data = Penjualan::with('barang')->get();
+        $order = 'desc';
+        $data = Penjualan::join('barang', 'barang.id', '=', 'penjualan.barang_id')->orderBy('penjualan.tanggal', $order)->select('penjualan.*')->get();
 
-        //dd($data);
+        // dd($data);
         $this->data['jual'] = $data;
 
         return view('penjualan.index', $this->data);
@@ -48,21 +53,75 @@ class PenjualanController extends Controller
 
         //dd($request->barang_id);
         //dd($json);
-        for ($i = 0; $i < count($request->barang_id); $i++) {
-            $penjualan = new Penjualan();
-            $penjualan->barang_id = $request->barang_id[$i];
-            $penjualan->jumlah = $request->jumlah[$i];
-            $penjualan->harga = $request->harga[$i];
-            $penjualan->total_harga = $request->total_harga[$i];
-            $savePenjualan = $penjualan->save();
-        }
-        //dd($barang->nama_barang);
+        try {
+            $this->validate($request, [
+                'barang_id' => 'required',
+                'jumlah' => 'required',
+                'harga' => 'required',
+                'total_harga' => 'required'
+            ]);
 
-        //dd($saveBarang);
-        if ($savePenjualan == true) {
-            return redirect()->route('penjualan.index')->with('success', 'Data Barang berhasil ditambah!');
-        } else {
-            return redirect()->route('penjualan.create')->with('validationErrors', 'Coba Dicek Lagi Cuy');
+            for ($i = 0; $i < count($request->barang_id); $i++) {
+                $penjualan = new Penjualan();
+                $penjualan->barang_id = $request->barang_id[$i];
+                $penjualan->kode_penjualan = "SELL-" . date('Ymd') . "-" . $request->barang_id[$i] . "-" . Str::random(5);
+                if (empty($request->jumlah[$i])) {
+                    return redirect()->route('penjualan.create')->with('validationErrors', 'Jumlah barang tidak boleh kosong!');
+                } else {
+                    $penjualan->jumlah = $request->jumlah[$i];
+                }
+
+                if (empty($request->harga[$i])) {
+                    return redirect()->route('penjualan.create')->with('validationErrors', 'Harga penjualan tidak boleh kosong!');
+                } else {
+                    $penjualan->harga = $request->harga[$i];
+                }
+
+                if (empty($request->total_harga[$i])) {
+                    return redirect()->route('penjualan.create')->with('validationErrors', 'Total harga tidak boleh kosong!');
+                } else {
+                    $penjualan->total_harga = $request->total_harga[$i];
+                }
+
+                $penjualan->created_by = auth()->user()->email;
+                $penjualan->tanggal = date('Y-m-d');
+
+                $this->kurangiStokBarang($request->barang_id[$i], $request->jumlah[$i]);
+
+                if ($this->state) {
+                    $penjualan->save();
+                    $this->state = true;
+                    return redirect()->route('penjualan.index')->with('success', 'Penjualan Barang berhasil ditambah!');
+                }
+            }
+            return redirect()->route('penjualan.create');
+        } catch (\Exception $e) {
+            return redirect()->route('penjualan.create')->with('validationErrors', 'Cek kembali penjualan!');
+        }
+    }
+
+    private function kurangiStokBarang($idBarang, $jumlahBeli)
+    {
+        $_product = Barang::with(['pembelian' => function ($query) {
+            $query->orderBy('tanggal', 'asc');
+        }])->find($idBarang);
+        $quantity = $jumlahBeli;
+        $batches = $_product->pembelian;
+        $max = $batches->sum('current_stock');
+        if ($quantity > $max) {
+            $this->state = false;
+            return redirect()->route('penjualan.create')->with('validationErrors', 'Stok Barang Tidak Mencukupi');
+        }
+        foreach ($batches as $batch) {
+            if ($batch->current_stock > $quantity) {
+                $batch->current_stock -= $quantity;
+                $batch->save();
+                break;
+            } else {
+                $quantity -= $batch->current_stock;
+                $batch->current_stock = 0;
+                $batch->save();
+            }
         }
     }
 

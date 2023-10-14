@@ -6,6 +6,7 @@ use App\Models\Barang;
 use App\Models\Pembelian;
 use App\Models\Penjualan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use PDF;
 
 class BarangController extends Controller
@@ -52,6 +53,7 @@ class BarangController extends Controller
         $barang->nama_barang = $request->nama_barang;
         $barang->kode_barang = $request->kode_barang;
         $barang->harga_jual = $request->harga_jual;
+        $barang->created_by = Auth::user()->email;
         //dd($barang->nama_barang);
         $saveBarang = $barang->save();
 

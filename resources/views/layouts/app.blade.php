@@ -40,12 +40,12 @@
                         <a href="#" class="nav_link"> <i class='bx bx-bar-chart-alt-2 nav_icon'></i> <span class="nav_name">Dalam Pengerjaan</span> </a> -->
                         <hr>
                         <div class="dropdown pb-1" style=" width: 100%; margin-top: 10px; margin-bottom: 10px; margin-left: 20px; position: absolute; bottom: 0">
-                            <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                            <a href="{{route('profile.edit', Auth::user()->id)}}" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class='bx bx-user-circle nav_icon' style="margin-right: 10px"></i>
                                 <span class="d-none d-sm-inline mx-1 nav-name"> {{Auth::user()->name}}</span>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
-                                <li><a class="dropdown-item" href="#">Profile</a></li>
+                                <li><a class="dropdown-item" href="{{route('profile.edit', Auth::user()->id)}}">Profile</a></li>
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>

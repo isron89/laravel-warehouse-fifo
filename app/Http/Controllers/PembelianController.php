@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Pembelian;
 use App\Models\Barang;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class PembelianController extends Controller
 {
@@ -15,7 +16,9 @@ class PembelianController extends Controller
      */
     public function index()
     {
-        $data = Pembelian::with('barang')->get();
+        // $data = Pembelian::with('barang')->get();
+        $order = 'desc';
+        $data = Pembelian::join('barang', 'barang.id', '=', 'pembelian.barang_id')->orderBy('pembelian.tanggal', $order)->select('pembelian.*')->get();
 
         //dd($data);
         $this->data['beli'] = $data;
@@ -44,20 +47,27 @@ class PembelianController extends Controller
     {
         //dd($request->jumlah);
         //Masukan Data ke Database
-        $pembelian = new Pembelian();
-        $pembelian->tanggal = $request->tanggal;
-        $pembelian->barang_id = $request->barang_id;
-        $pembelian->jumlah = $request->jumlah;
-        $pembelian->harga = $request->harga;
-        $pembelian->total_harga = $request->total_harga;
-        //dd($hewan->nama_hewan);
-        $savePembelian = $pembelian->save();
+        try {
+            $this->validate($request, [
+                'barang_id' => 'required',
+                'jumlah' => 'required',
+                'harga' => 'required',
+                'total_harga' => 'required'
+            ]);
 
-        //dd($saveHewan);
-        if ($savePembelian == true) {
+            $pembelian = new Pembelian();
+            $pembelian->tanggal = $request->tanggal;
+            $pembelian->barang_id = $request->barang_id;
+            $pembelian->kode_pembelian = "BUY-" . date('Ymd') . "-" . $request->barang_id . "-" . Str::random(5);
+            $pembelian->jumlah = $request->jumlah;
+            $pembelian->current_stock = $request->jumlah;
+            $pembelian->harga = $request->harga;
+            $pembelian->total_harga = $request->total_harga;
+            $pembelian->created_by = auth()->user()->email;
+            $pembelian->save();
             return redirect()->route('pembelian.index')->with('success', 'Data Barang berhasil ditambah!');
-        } else {
-            return redirect()->route('pembelian.edit')->with('validationErrors', 'Coba Dicek Lagi Cuy');
+        } catch (\Throwable $th) {
+            return redirect()->route('pembelian.create')->with('validationErrors', 'Cek kembali pembelian anda!');
         }
     }
 

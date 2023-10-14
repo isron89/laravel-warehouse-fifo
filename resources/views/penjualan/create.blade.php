@@ -6,8 +6,8 @@
 @include('includes.css')
 @endsection
 @push('scriptsAtas')
-<script type="text/javascript">
-    $(document).ready(function() {
+<!-- <script type="text/javascript">
+    /** $(document).ready(function() {
         
         ++count;
         var html =  '<tr><td class="py-2 px-3"><select class="form-select" aria-label="Default select example" id="nama_barang'+ count +'" name="barang_id[]">@foreach ($barangs as $key => $bar )<option value="{{$bar->id}}">{{$bar->nama_barang}}</option> @endforeach</select></td> <td class="py-2 px-3"><input type="number" id="jumlah" name="jumlah[]" class="form-control" placeholder="1"></td><td class="py-2 px-3"><input type="number" id="harga" name="harga[]" class="form-control"></td> <td class="py-2 px-3"><input type="number" id="total_harga" name="total_harga[]" class="form-control" placeholder="1"></td><td class="py-2 px-3"><input type="button" class="btn btn-danger" id="remove" value="- Hapus"></td></tr>';
@@ -20,8 +20,8 @@
             $(this).closest('tr').remove();
         });
     
-    } );
-    </script>
+    } ); **/
+    </script> -->
 @endpush
 
 @section('content')
@@ -47,7 +47,7 @@
                         <td></td>
                     </tr>
                     @endforeach
-                @endif
+                    @endif
                 </tbody>
             </table>
         </div>
@@ -69,7 +69,7 @@
                         <th class="px-4 text-center">Jumlah</th>
                         <th class="px-4 text-center">Harga Jual</th>
                         <th class="px-4 text-center">Total Harga</th>
-                        <th><input type="button" class="btn btn-primary" id="add" value="+ Tambah"></th>
+                        <!-- <th><input type="button" class="btn btn-primary" id="add" value="+ Tambah"></th> -->
                     </tr>
                 </thead>
                 <tbody id="table_space">
@@ -77,14 +77,14 @@
                         <td class="py-2 px-3">
                             <select class="form-select" aria-label="Default select example" id="nama_barang" name="barang_id[]">
                                 @foreach ($barangs as $key => $bar )
-                                    <option value="{{$bar->id}}">{{$bar->nama_barang}}</option>
+                                <option value="{{$bar->id}}">{{$bar->nama_barang}}</option>
                                 @endforeach
                             </select>
                         </td>
                         <td class="py-2 px-3"><input type="number" id="jumlah" name="jumlah[]" class="form-control" placeholder="1"></td>
                         <td class="py-2 px-3"><input type="number" id="harga" name="harga[]" class="form-control"></td>
                         <td class="py-2 px-3"><input type="number" id="total_harga" name="total_harga[]" class="form-control" placeholder="1"></td>
-                        <td class="py-2 px-3"><input type="button" class="btn btn-danger" id="remove" value="- Hapus"></td>
+                        <!-- <td class="py-2 px-3"><input type="button" class="btn btn-danger" id="remove" value="- Hapus"></td> -->
                     </tr>
                 </tbody>
             </table>
@@ -95,42 +95,48 @@
 
 @push('scripts')
 <script>
-    $(document).ready(function () {
-        $("#jumlah , #harga").keyup(function(){
-              var jum = $("#jumlah").val();
-              var hrg = $("#harga").val();
-              var total = parseInt(jum) * parseInt(hrg);
+    $(document).ready(function() {
+        $("#jumlah , #harga").keyup(function() {
+            var jum = $("#jumlah").val();
+            var hrg = $("#harga").val();
+            var total = parseInt(jum) * parseInt(hrg);
 
-              $("#total_harga").val(total);
+            $("#total_harga").val(total);
 
-            });
+        });
     });
 </script>
 <!-- QR Code Scanner -->
 <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
 <script>
     function onScanSuccess(decodedText, decodedResult) {
-    // handle the scanned code as you like, for example:
+        // handle the scanned code as you like, for example:
         // console.log(`Code matched = ${decodedText}`, decodedResult);
-            // alert(decodedText);
-            $('#result').val(decodedText);
-            let id = decodedText;
-            var html =  '{<tr><td class="py-2 px-3"><input type="text" class="form-control" id="result"></td><td class="py-2 px-3"><input type="number" class="form-control"></td><td class="py-2 px-3"><input type="number" class="form-control" readonly></td><td class="py-2 px-3"><input type="number" class="form-control"></td><td class="py-2 px-3"><input type="button" class="btn btn-danger" id="remove" value="- Hapus"></td></tr>';
-                   
-            $("#table_space").append(html);
+        // alert(decodedText);
+        $('#result').val(decodedText);
+        let id = decodedText;
+        var html = '{<tr><td class="py-2 px-3"><input type="text" class="form-control" id="result"></td><td class="py-2 px-3"><input type="number" class="form-control"></td><td class="py-2 px-3"><input type="number" class="form-control" readonly></td><td class="py-2 px-3"><input type="number" class="form-control"></td><td class="py-2 px-3"><input type="button" class="btn btn-danger" id="remove" value="- Hapus"></td></tr>';
+
+        $("#table_space").append(html);
 
     }
 
     function onScanFailure(error) {
-    // handle scan failure, usually better to ignore and keep scanning.
-    // for example:
+        // handle scan failure, usually better to ignore and keep scanning.
+        // for example:
         // console.warn(`Code scan error = ${error}`);
     }
 
     let html5QrcodeScanner = new Html5QrcodeScanner(
-        "reader",
-    { fps: 10, qrbox: {width: 250, height: 250} },
-    /* verbose= */ false);
+        "reader", {
+            fps: 10,
+            qrbox: {
+                width: 250,
+                height: 250
+            }
+        },
+        /* verbose= */
+        false);
     html5QrcodeScanner.render(onScanSuccess, onScanFailure);
 </script>
 @endpush

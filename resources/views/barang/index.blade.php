@@ -9,6 +9,9 @@
 @section('content')
 <a href="{{route('barang.create')}}" class="btn btn-primary"><i class='bx bx-plus'></i> Tambah</a>
 <div class="card shadow mt-2">
+    <div class="card-header" style="display: flex; justify-content: center;">
+        <h4 class="card-title">Manajemen Barang</h4>
+    </div>
     <div class="card-body">
         @include('includes.flash')
         <table id="example" class="display" style="width:100%">
@@ -62,12 +65,15 @@
             </tbody>
         </table>
     </div>
+    <!-- <div>
+        //$barang->links()
+    </div> -->
 </div>
 @push('scripts')
 <script>
     $(document).ready(function() {
         $('#example').DataTable({
-            responsive: true,
+            responsive: true
         });
     });
 

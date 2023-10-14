@@ -7,6 +7,7 @@ use App\Http\Controllers\PembelianController;
 use App\Http\Controllers\PenjualanController;
 use App\Http\Controllers\DashController;
 use App\Http\Controllers\TesController;
+use App\Http\Controllers\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,4 +31,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('barang', BarangController::class);
     Route::resource('pembelian', PembelianController::class);
     Route::resource('penjualan', PenjualanController::class);
+
+    Route::resource('profile', ProfileController::class);
 });

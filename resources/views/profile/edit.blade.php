@@ -18,11 +18,11 @@
                 <div class="row">
                     <div class="col-6">
                         <label for="nama_user" class="fw-bold">Nama User</label>
-                        <input type="text" class="form-control" id="nama_user" name="nama_user" value="{{$user->nama_user}}">
+                        <input type="text" class="form-control" id="nama_user" name="name" value="{{$user->name}}">
                     </div>
                     <div class="col-6">
                         <label for="email_user" class="fw-bold">Email User</label>
-                        <input type="text" class="form-control" id="email_user" name="email_user" value="{{$user->email_user}}">
+                        <input type="text" class="form-control" id="email_user" name="email" value="{{$user->email}}">
                     </div>
                 </div>
                 <div class="row mt-2 mb-3">

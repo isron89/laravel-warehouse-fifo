@@ -8,10 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Pembelian extends Model
 {
     protected $table = 'pembelian';
-    protected $fillable = [ 'tanggal','barang_id','jumlah','harga','total_harga'];
+    protected $fillable = ['tanggal', 'barang_id', 'jumlah', 'current_stock', 'harga', 'total_harga'];
 
     public function barang()
     {
-        return $this->belongsTo(Barang::class);
+        return $this->belongsTo(Barang::class, 'barang_id');
     }
 }

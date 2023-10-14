@@ -34,14 +34,20 @@
 @endif
 
 @if (session::has('validationErrors'))
-    <div class = "alert alert-danger alert-dismissible fade show">
-        @foreach (session::get('validationErrors') as $item)
-            @foreach ($item as $eer)
-                <ul>
-                    <li>{{$eer}}</li>
-                </ul>
-            @endforeach
-        @endforeach
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
+<div class="alert alert-danger alert-dismissible fade show">
+    @if (is_array(session::get('validationErrors')) || is_object(session::get('validationErrors')))
+    @foreach (session::get('validationErrors') as $item)
+    @foreach ($item as $eer)
+    <ul>
+        <li>{{$eer}}</li>
+    </ul>
+    @endforeach
+    @endforeach
+    @else
+    <ul>
+        <li>{{session::get('validationErrors')}}</li>
+    </ul>
+    @endif
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
 @endif
