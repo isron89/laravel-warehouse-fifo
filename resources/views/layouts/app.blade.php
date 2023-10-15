@@ -30,7 +30,7 @@
         <div class="l-navbar" id="nav-bar" style="display: block; height: 100vh; width: 250px;">
             <nav class="nav">
                 <div>
-                    <a href="/home" class="nav_logo"> <i class='bx bx-home-smile nav_logo-icon'></i> <span class="nav_logo-name">Supplat Warehouse</span> </a>
+                    <a href="{{ route('/') }}" class="nav_logo"> <i class='bx bx-home-smile nav_logo-icon'></i> <span class="nav_logo-name">Supplat Granite Warehouse</span> </a>
                     <div class="nav_list">
                         <a href="{{route('dashboard.index')}}" class="nav_link {{ Request::is('dashboard','dashboard/*','/') ? 'active':'' }}"> <i class='bx bx-grid-alt nav_icon'></i> <span class="nav_name">Dashboard</span> </a>
                         <a href="{{route('barang.index')}}" class="nav_link {{ Request::is('barang','barang/*') ? 'active':'' }}"> <i class='bx bx-box nav_icon'></i> <span class="nav_name">Barang</span> </a>
