@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title'){{"Warehouse - Barang - ".($barang->nama_barang)}}@endsection
+@section('title'){{"Warehouse - User - ".($user->name)}}@endsection
 
 @section('cssTambah')
 @include('includes.css')
@@ -10,7 +10,7 @@
 <div class="card shadow">
     <div class="card-body px-5 py-4">
         <div class="row">
-            <h4 class="fw-bold">Detail Barang {{$barang->nama_barang}}</h4>
+            <h4 class="fw-bold">Detail User {{$user->name}}</h4>
         </div>
         <div class="row">
             <!-- <div class="visible-print">
@@ -22,19 +22,24 @@
             <div class="row mt-3">
                 <table>
                     <tr>
-                        <td width="200px">Nama Barang</td>
+                        <td width="200px">Nama User</td>
                         <td width="20px">:</td>
-                        <td>{{$barang->nama_barang}}</td>
+                        <td>{{$user->name}}</td>
                     </tr>
                     <tr>
-                        <td>Kode Barang</td>
+                        <td>Email</td>
                         <td>:</td>
-                        <td>{{$barang->kode_barang}}</td>
+                        <td>{{$user->email}}</td>
                     </tr>
                     <tr>
-                        <td>Harga Jual</td>
+                        <td>Role</td>
                         <td>:</td>
-                        <td>{{"Rp. ".number_format($barang->harga_jual,0,".",".")}}</td>
+                        <td>{{$user->role}}</td>
+                    </tr>
+                    <tr>
+                        <td>Created date</td>
+                        <td>:</td>
+                        <td>{{$user->created_at}}</td>
                     </tr>
                 </table>
             </div>

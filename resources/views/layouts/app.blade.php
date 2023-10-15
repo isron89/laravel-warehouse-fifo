@@ -36,6 +36,9 @@
                         <a href="{{route('barang.index')}}" class="nav_link {{ Request::is('barang','barang/*') ? 'active':'' }}"> <i class='bx bx-box nav_icon'></i> <span class="nav_name">Barang</span> </a>
                         <a href="{{route('pembelian.index')}}" class="nav_link {{ Request::is('pembelian','pembelian/*') ? 'active':'' }}"> <i class='bx bxs-truck nav_icon'></i> <span class="nav_name">Pembelian</span> </a>
                         <a href="{{route('penjualan.index')}}" class="nav_link {{ Request::is('penjualan','penjualan/*') ? 'active':'' }}"> <i class='bx bx-coin-stack nav_icon'></i> <span class="nav_name">Penjualan</span> </a>
+                        @if (Auth::user()->role == 'admin')
+                        <a href="{{route('user.index')}}" class="nav_link {{ Request::is('user','user/*') ? 'active':'' }}"> <i class='bx bx-group nav_icon'></i> <span class="nav_name">User</span> </a>
+                        @endif
                         <!-- <a href="#" class="nav_link"> <i class='bx bx-folder nav_icon'></i> <span class="nav_name">Dalam Pengerjaan</span> </a>
                         <a href="#" class="nav_link"> <i class='bx bx-bar-chart-alt-2 nav_icon'></i> <span class="nav_name">Dalam Pengerjaan</span> </a> -->
                         <hr>

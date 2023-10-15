@@ -6,7 +6,6 @@ use App\Models\Penjualan;
 use App\Models\Barang;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-use Yajra\DataTables\Html\Editor\Fields\Boolean;
 
 class PenjualanController extends Controller
 {

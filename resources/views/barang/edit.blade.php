@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title'){{"Barang - Edit - ".($barang->nama_barang)}}@endsection
+@section('title'){{"Warehouse - Edit Barang - ".($barang->nama_barang)}}@endsection
 
 @section('cssTambah')
 @include('includes.css')
@@ -11,7 +11,7 @@
     <div class="card-body px-5 py-4">
         @include('includes.flash')
         <form action="{{route('barang.update',$barang->id)}}" method="POST">
-            @csrf                
+            @csrf
             @method('put')
             <div class="container">
                 <h3 class="fw-bold">Barang Edit : {{$barang->nama_barang}}</h3>
@@ -33,7 +33,7 @@
                 </div>
                 <button type="submit" class="btn btn-outline-primary">Simpan</button>
             </div>
-          </form>
+        </form>
     </div>
 </div>
 @include ('includes.scripts')

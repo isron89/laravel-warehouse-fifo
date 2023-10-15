@@ -1,16 +1,16 @@
 @extends('layouts.app')
 
-@section('title','Warehouse - Barang')
+@section('title','Warehouse - User')
 
 @section('cssTambah')
 @include('includes.css')
 @endsection
 
 @section('content')
-<a href="{{route('barang.create')}}" class="btn btn-primary"><i class='bx bx-plus'></i> Tambah</a>
+<a href="{{route('user.create')}}" class="btn btn-primary"><i class='bx bx-plus'></i> Tambah</a>
 <div class="card shadow mt-2">
     <div class="card-header" style="display: flex; justify-content: center;">
-        <h4 class="card-title">Manajemen Barang</h4>
+        <h4 class="card-title">Manajemen User</h4>
     </div>
     <div class="card-body">
         @include('includes.flash')
@@ -18,38 +18,39 @@
             <thead>
                 <tr>
                     <th width="10px">No.</th>
-                    <th>Nama Barang</th>
-                    <th>Kode Barang</th>
-                    <th>Harga Jual</th>
+                    <th>Nama User</th>
+                    <th>Kode Email</th>
+                    <th>Created Date</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
             <tbody>
-                @if (count($barang))
-                @foreach ($barang as $key => $barangs)
+                @if (count($user))
+                @foreach ($user as $key => $users)
                 <tr>
                     <td>{{$key+1}}</td>
-                    <td>{{$barangs->nama_barang}}</td>
-                    <td>{{$barangs->kode_barang}}</td>
-                    <td>{{"Rp. ".number_format($barangs->harga_jual,0,".",".")}}</td>
+                    <td>{{$users->name}}</td>
+                    <td>{{$users->email}}</td>
+                    <td>{{$users->created_at}}</td>
                     <td>
                         <div class="row gx-6 gy-3">
                             <div class="col">
-                                <a href="{{route('barang.edit', $barangs->id)}}">
+                                <a href="{{route('user.edit', $users->id)}}">
                                     <button class="btn btn-warning text-light" data-toggle="tooltip" data-placement="top" title="Ubah">
                                         <i class="bi bi-pencil-square"></i>
                                     </button>
                                 </a>
                             </div>
                             <div class="col">
-                                <a href="{{route('barang.show', $barangs->id)}}">
+                                <a href="{{route('user.show', $users->id)}}">
                                     <button class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Ubah">
                                         <i class="bi bi-eye-fill"></i>
                                     </button>
                                 </a>
                             </div>
+                            @if ($users->role == 'user')
                             <div class="col">
-                                <form id="delete-barang-{{$barangs->id}}" action="/barang/{{$barangs->id}}" method="POST" style="display: inline;">
+                                <form id="delete-user-{{$users->id}}" action="/user/{{$users->id}}" method="POST" style="display: inline;">
                                     @method('DELETE')
                                     @csrf
                                     <button type="submit" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Hapus" onclick="deleteConfirmation()">
@@ -57,6 +58,7 @@
                                     </button>
                                 </form>
                             </div>
+                            @endif
                         </div>
                     </td>
                 </tr>

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title','Pembelian - Tambah')
+@section('title','Pembelian - Tambah Pembelian')
 
 @section('cssTambah')
 @include('includes.css')
@@ -23,7 +23,7 @@
                         <label for="nama_barang" class="fw-bold">Nama Barang</label>
                         <select class="form-select" aria-label="Default select example" id="nama_barang" name="barang_id">
                             @foreach ($barangs as $key => $bar )
-                                <option value="{{$bar->id}}">{{$bar->nama_barang}}</option>
+                            <option value="{{$bar->id}}">{{$bar->nama_barang}}</option>
                             @endforeach
                         </select>
                     </div>
@@ -46,29 +46,29 @@
                 </div>
                 <button type="submit" class="btn btn-outline-primary">Tambahkan</button>
             </div>
-          </form>
+        </form>
     </div>
 </div>
 
 @push('scripts')
 <script>
-    $(document).ready(function () {
+    $(document).ready(function() {
         $('#example').DataTable();
-        $("#jumlah , #harga").keyup(function(){
-              var jum = $("#jumlah").val();
-              var hrg = $("#harga").val();
-              var total = parseInt(jum) * parseInt(hrg);
+        $("#jumlah , #harga").keyup(function() {
+            var jum = $("#jumlah").val();
+            var hrg = $("#harga").val();
+            var total = parseInt(jum) * parseInt(hrg);
 
-              $("#total_harga").val(total);
+            $("#total_harga").val(total);
 
-            });
+        });
     });
 </script>
 <script>
     var date = new Date();
     var year = date.getFullYear();
-    var month = date.getMonth()+1;
-    var todaydate = String(date.getDate()).padStart(2,'0');
+    var month = date.getMonth() + 1;
+    var todaydate = String(date.getDate()).padStart(2, '0');
     var dataPatern = year + '/' + month + '/' + todaydate;
     document.getElementById("date").value = dataPatern;
 </script>

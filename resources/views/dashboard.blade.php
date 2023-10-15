@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title','Tes')
+@section('title','Warehouse - Dashboard')
 
 @section('cssTambah')
 @include('includes.css')

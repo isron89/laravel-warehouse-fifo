@@ -61,7 +61,7 @@ class BarangController extends Controller
         if ($saveBarang == true) {
             return redirect()->route('barang.index')->with('success', 'Data Barang berhasil ditambah!');
         } else {
-            return redirect()->route('barang.edit')->with('validationErrors', 'Coba Dicek Lagi Cuy');
+            return redirect()->route('barang.edit')->with('validationErrors', 'Gagal menambahkan data barang');
         }
     }
 
@@ -122,7 +122,7 @@ class BarangController extends Controller
         if ($updatebarang == true) {
             return redirect()->route('barang.index')->with('success', 'Data barang berhasil diubah!');
         } else {
-            return redirect()->route('barang.edit')->with('validationErrors', 'Data Gak Bisa Diapain');
+            return redirect()->route('barang.edit')->with('validationErrors', 'Gagal mengubah data barang');
         }
     }
 
@@ -155,7 +155,7 @@ class BarangController extends Controller
         if ($deleteData == true) {
             return redirect()->route('barang.index')->with('success', 'Data barang berhasil dihapus');
         } else {
-            return redirect()->route('barang.index')->with('ValidationErrors', 'Data Gak Bisa Diapain');
+            return redirect()->route('barang.index')->with('ValidationErrors', 'Gagal menghapus data barang');
         }
     }
 }

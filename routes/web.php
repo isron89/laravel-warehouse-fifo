@@ -8,6 +8,7 @@ use App\Http\Controllers\PenjualanController;
 use App\Http\Controllers\DashController;
 use App\Http\Controllers\TesController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,4 +34,5 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('penjualan', PenjualanController::class);
 
     Route::resource('profile', ProfileController::class);
+    Route::resource('user', UserController::class);
 });
