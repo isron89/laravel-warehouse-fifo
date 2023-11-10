@@ -34,6 +34,7 @@
                         <th></th>
                         <th width="100px">Nama Barang</th>
                         <th width="100px">Harga Barang</th>
+                        <th width="100px">Stok</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -44,6 +45,7 @@
                         <td></td>
                         <td>{{$bar->nama_barang}}</td>
                         <td>{{"Rp. ".number_format($bar->harga_jual,0,".",".")}}</td>
+                        <td>{{$bar->stock}}</td>
                         <td></td>
                     </tr>
                     @endforeach

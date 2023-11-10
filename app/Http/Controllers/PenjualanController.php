@@ -6,6 +6,7 @@ use App\Models\Penjualan;
 use App\Models\Barang;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
 
 class PenjualanController extends Controller
 {
@@ -34,8 +35,10 @@ class PenjualanController extends Controller
      */
     public function create()
     {
-        $databarang = Barang::all();
-        // dd($databarang);         
+        $databarang = Barang::select('barang.id', 'barang.nama_barang', 'barang.harga_jual', DB::raw('SUM(pembelian.current_stock) As stock'))
+            ->leftJoin('pembelian', 'pembelian.barang_id', '=', 'barang.id')
+            ->groupBy('barang.id', 'barang.nama_barang', 'barang.harga_jual')
+            ->get();
         $this->data['barangs'] = $databarang;
 
         return view('penjualan.create', $this->data);
