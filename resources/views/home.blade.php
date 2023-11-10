@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>Supplat Granite Warehouse - Home</title>
+    <title>Nusantara Warehouse - Home</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
@@ -37,7 +37,7 @@
     <div id="topbar" class="fixed-top d-flex align-items-center ">
         <div class="container d-flex align-items-center justify-content-center justify-content-md-between">
             <div class="contact-info d-flex align-items-center">
-                <i class="bi bi-envelope-fill"></i><a href="mailto:contact@example.com">info@supplat-granite.com</a>
+                <i class="bi bi-envelope-fill"></i><a href="mailto:contact@example.com">info@nusantaralistsupply.com</a>
                 <i class="bi bi-phone-fill phone-icon"></i> +62 851 5545 1234
             </div>
             @if (Route::has('login'))
@@ -55,7 +55,7 @@
     <header id="header" class="fixed-top d-flex align-items-center ">
         <div class="container d-flex align-items-center justify-content-between">
 
-            <h1 class="logo"><a href="{{ route('/') }}">Supplat Granite Warehouse</a></h1>
+            <h1 class="logo"><a href="{{ route('/') }}">Nusantara Warehouse</a></h1>
             <!-- Uncomment below if you prefer to use an image logo -->
             <!-- <a href=index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
@@ -92,8 +92,8 @@
             <!-- Slide 1 -->
             <div class="carousel-item active">
                 <div class="carousel-container">
-                    <h2 class="animate__animated animate__fadeInDown">Welcome to <span>CV List Supplat Granite</span></h2>
-                    <p class="animate__animated animate__fadeInUp">CV List Supplat Granite merupakan perusahaan yang bergerak di bidang distribusi produk keramik. Perusahaan berlokasi di Kota Surabaya, Jawa Timur.</p>
+                    <h2 class="animate__animated animate__fadeInDown">Welcome to <span>CV Nusantara List Supply</span></h2>
+                    <p class="animate__animated animate__fadeInUp">CV Nusantara List Supply merupakan perusahaan yang bergerak di bidang distribusi produk keramik. Perusahaan berlokasi di Kota Surabaya, Jawa Timur.</p>
                     <a href="#about" class="btn-get-started animate__animated animate__fadeInUp scrollto">Read More</a>
                 </div>
             </div>
@@ -101,8 +101,8 @@
             <!-- Slide 2 -->
             <div class="carousel-item">
                 <div class="carousel-container">
-                    <h2 class="animate__animated animate__fadeInDown">Supplat Granite Warehouse</h2>
-                    <p class="animate__animated animate__fadeInUp">Supplat Granite Warehouse merupakan sistem informasi manajemen produk keramik untuk memonitoring stok produk.</p>
+                    <h2 class="animate__animated animate__fadeInDown">Nusantara Warehouse</h2>
+                    <p class="animate__animated animate__fadeInUp">Nusantara Warehouse merupakan sistem informasi manajemen produk keramik untuk memonitoring stok produk.</p>
                     <a href="#about" class="btn-get-started animate__animated animate__fadeInUp scrollto">Read More</a>
                 </div>
             </div>
@@ -163,13 +163,13 @@
 
                 <div class="section-title">
                     <h2>Tentang Kami</h2>
-                    <p>CV List Supplat Granite merupakan perusahaan yang bergerak di bidang distribusi produk keramik. Perusahaan berlokasi di Kota Surabaya, Jawa Timur.</p>
+                    <p>CV Nusantara List Supply merupakan perusahaan yang bergerak di bidang distribusi produk keramik. Perusahaan berlokasi di Kota Surabaya, Jawa Timur.</p>
                 </div>
 
                 <div class="row content">
                     <div class="col-lg-6">
                         <p>
-                            Supplat Granite Warehouse merupakan sistem informasi manajemen produk keramik untuk memonitoring stok produk. Manajemen stok produk menggunakan metode First In First Out (FIFO). Sistem ini memiliki beberapa fitur utama, diantaranya :
+                            Nusantara Warehouse merupakan sistem informasi manajemen produk keramik untuk memonitoring stok produk. Manajemen stok produk menggunakan metode First In First Out (FIFO). Sistem ini memiliki beberapa fitur utama, diantaranya :
                         </p>
                         <ul>
                             <li><i class="ri-check-double-line"></i> Dashboard produk</li>
@@ -200,13 +200,13 @@
                             <div class="address">
                                 <i class="bi bi-geo-alt"></i>
                                 <h4>Alamat:</h4>
-                                <p>Kota Surabaya, Jawa Timur</p>
+                                <p>Jl. Ngagel No.165 Kota Surabaya, Jawa Timur</p>
                             </div>
 
                             <div class="email">
                                 <i class="bi bi-envelope"></i>
                                 <h4>Email:</h4>
-                                <p>info@supplat-granite.com</p>
+                                <p>info@nusantaralistsupply.com</p>
                             </div>
 
                             <div class="phone">
@@ -233,7 +233,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-6">
-                        <h4>Supplat Granite Warehouse</h4>
+                        <h4>Nusantara Warehouse</h4>
                         <p>Sistem Informasi Manajemen Produk Keramik</p>
                     </div>
                 </div>
@@ -259,14 +259,14 @@
                             Jawa Timur <br>
                             Indonesia <br><br>
                             <strong>Phone:</strong> +62 851 5545 1234<br>
-                            <strong>Email:</strong> info@supplat-granite.com<br>
+                            <strong>Email:</strong> info@nusantaralistsupply.com<br>
                         </p>
 
                     </div>
 
                     <div class="col-lg-3 col-md-6 footer-info">
-                        <h3>CV List Supplat Granite</h3>
-                        <p>CV List Supplat Granite merupakan perusahaan yang bergerak di bidang distribusi produk keramik di Kota Surabaya.</p>
+                        <h3>CV Nusantara List Supply</h3>
+                        <p>CV Nusantara List Supply merupakan perusahaan yang bergerak di bidang distribusi produk keramik di Kota Surabaya.</p>
                     </div>
 
                 </div>
@@ -275,7 +275,7 @@
 
         <div class="container">
             <div class="credits">
-                Supplat Granite Warehouse</a>
+                Nusantara Warehouse</a>
             </div>
         </div>
     </footer><!-- End Footer -->

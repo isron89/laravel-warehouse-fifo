@@ -8,7 +8,7 @@
                     <span class="navbar-toggler-bar bar3"></span>
                 </button>
             </div>
-            <a class="navbar-brand" href="/">Supplat Granite Warehouse</a>
+            <a class="navbar-brand" href="/">Nusantara Warehouse</a>
             <!-- <a class="navbar-brand" href="#">{{ $page ?? '' }}</a> -->
         </div>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-expanded="false" aria-label="Toggle navigation">
