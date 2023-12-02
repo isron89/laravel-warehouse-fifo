@@ -19,8 +19,11 @@
                 <tr>
                     <th width="10px">No.</th>
                     <th>Tanggal</th>
+                    <th>Kode Pembelian</th>
+                    <th>Kode Barang</th>
                     <th>Nama Barang</th>
                     <th>Jumlah</th>
+                    <th>Sisa Stok</th>
                     <th>Harga</th>
                     <th>Total Harga</th>
                 </tr>
@@ -31,8 +34,11 @@
                 <tr>
                     <td>{{$key+1}}</td>
                     <td>{{$belis->tanggal}}</td>
+                    <td>{{$belis->kode_pembelian}}</td>
+                    <td>{{$belis->barang->kode_barang}}</td>
                     <td>{{$belis->barang->nama_barang}}</td>
                     <td>{{$belis->jumlah}}</td>
+                    <td>{{$belis->current_stock}}</td>
                     <td>{{"Rp. ".number_format($belis->harga,0,".",".")}}</td>
                     <td>{{"Rp. ".number_format($belis->total_harga,0,".",".")}}</td>
                 </tr>

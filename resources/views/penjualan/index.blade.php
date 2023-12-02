@@ -19,6 +19,8 @@
                 <tr>
                     <th width="10px">No.</th>
                     <th>Tanggal Waktu Transaksi</th>
+                    <th>Kode Penjualan</th>
+                    <th>Kode Barang</th>
                     <th>Nama Barang</th>
                     <th>Jumlah</th>
                     <th>Harga</th>
@@ -31,6 +33,8 @@
                 <tr>
                     <td>{{$key+1}}</td>
                     <td>{{$jualan->tanggal}}</td>
+                    <td>{{$jualan->kode_penjualan}}</td>
+                    <td>{{$jualan->barang->kode_barang}}</td>
                     <td>{{$jualan->barang->nama_barang}}</td>
                     <td>{{$jualan->jumlah}}</td>
                     <td>{{"Rp. ".number_format($jualan->harga,0,".",".")}}</td>
