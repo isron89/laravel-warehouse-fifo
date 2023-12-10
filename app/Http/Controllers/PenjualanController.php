@@ -53,8 +53,8 @@ class PenjualanController extends Controller
     public function store(Request $request)
     {
 
-        //dd($request->barang_id);
-        //dd($json);
+        // dd($request);
+        // dd($json);
         try {
             $this->validate($request, [
                 'barang_id' => 'required',

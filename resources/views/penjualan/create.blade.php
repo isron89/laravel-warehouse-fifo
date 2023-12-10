@@ -27,7 +27,7 @@
 @section('content')
 <div class="card shadow mt-2">
     <div class="card-body">
-        <div class="row">
+        <!-- <div class="row">
             <table>
                 <thead>
                     <tr>
@@ -52,7 +52,7 @@
                     @endif
                 </tbody>
             </table>
-        </div>
+        </div> -->
         <div class="row items-center">
             <div class="col"></div>
             <div class="col-sm">
@@ -70,6 +70,7 @@
                         <th class="px-4 text-center">Nama Barang</th>
                         <th class="px-4 text-center">Jumlah</th>
                         <th class="px-4 text-center">Harga Jual</th>
+                        <th class="px-4 text-center">Sisa Stok</th>
                         <th class="px-4 text-center">Total Harga</th>
                         <!-- <th><input type="button" class="btn btn-primary" id="add" value="+ Tambah"></th> -->
                     </tr>
@@ -78,14 +79,16 @@
                     <tr>
                         <td class="py-2 px-3">
                             <select class="form-select" aria-label="Default select example" id="nama_barang" name="barang_id[]">
+                                <option value="" selected>--Choose an option--</option>
                                 @foreach ($barangs as $key => $bar )
-                                <option value="{{$bar->id}}">{{$bar->nama_barang}}</option>
+                                <option value="{{$bar->id}}" data-harga-jual="{{$bar->harga_jual}}" data-stok="{{$bar->stock}}">{{$bar->nama_barang}}</option>
                                 @endforeach
                             </select>
                         </td>
-                        <td class="py-2 px-3"><input type="number" id="jumlah" name="jumlah[]" class="form-control" placeholder="1"></td>
-                        <td class="py-2 px-3"><input type="number" id="harga" name="harga[]" class="form-control"></td>
-                        <td class="py-2 px-3"><input type="number" id="total_harga" name="total_harga[]" class="form-control" placeholder="1"></td>
+                        <td class="py-2 px-3"><input type="number" id="jumlah" name="jumlah[]" class="form-control" placeholder="0"></td>
+                        <td class="py-2 px-3"><input type="number" id="harga" name="harga[]" class="form-control" placeholder="0"></td>
+                        <td class="py-2 px-3"><input disabled type="number" id="stok" name="stok[]" class="form-control" placeholder="0"></td>
+                        <td class="py-2 px-3"><input type="number" id="total_harga" name="total_harga[]" class="form-control" placeholder="0"></td>
                         <!-- <td class="py-2 px-3"><input type="button" class="btn btn-danger" id="remove" value="- Hapus"></td> -->
                     </tr>
                 </tbody>
@@ -106,6 +109,22 @@
             $("#total_harga").val(total);
 
         });
+
+        // function hargaChanged(event) {
+        //     var selectElement = event.target;
+        //     var value = selectElement.value;
+        //     $("#harga").val(value);
+        // }
+    });
+
+    $("#nama_barang").change(function(e) {
+        // var val = document.getElementById('hargajual');
+        // var res = $('#hargajual').text();
+        var hargajual = $(e.target).children("option:selected").attr("data-harga-jual");
+        var sisastok = $(e.target).children("option:selected").attr("data-stok");
+        // console.log($(e.target).children("option:selected").attr("data-harga-jual"));
+        $("#harga").val(hargajual);
+        $("#stok").val(sisastok);
     });
 </script>
 <!-- QR Code Scanner -->
