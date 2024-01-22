@@ -32,6 +32,21 @@
                         <td>{{$barang->kode_barang}}</td>
                     </tr>
                     <tr>
+                        <td>Merk</td>
+                        <td>:</td>
+                        <td>{{$barang->merk}}</td>
+                    </tr>
+                    <tr>
+                        <td>Tipe</td>
+                        <td>:</td>
+                        <td>{{$barang->tipe}}</td>
+                    </tr>
+                    <tr>
+                        <td>Supplier</td>
+                        <td>:</td>
+                        <td>{{$barang->supplier}}</td>
+                    </tr>
+                    <tr>
                         <td>Harga Jual</td>
                         <td>:</td>
                         <td>{{"Rp. ".number_format($barang->harga_jual,0,".",".")}}</td>

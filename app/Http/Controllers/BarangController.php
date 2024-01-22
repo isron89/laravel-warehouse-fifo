@@ -46,12 +46,18 @@ class BarangController extends Controller
         $request->validate([
             'kode_barang' => 'required',
             'nama_barang' => 'required',
+            'merk' => 'required',
+            'tipe' => 'required',
+            'supplier' => 'required',
             'harga_jual' => 'required'
         ]);
 
         $barang = new Barang();
         $barang->nama_barang = $request->nama_barang;
         $barang->kode_barang = $request->kode_barang;
+        $barang->merk = $request->merk;
+        $barang->tipe = $request->tipe;
+        $barang->supplier = $request->supplier;
         $barang->harga_jual = $request->harga_jual;
         $barang->created_by = Auth::user()->email;
         //dd($barang->nama_barang);
@@ -108,6 +114,9 @@ class BarangController extends Controller
         $request->validate([
             'kode_barang' => 'required',
             'nama_barang' => 'required',
+            'merk' => 'required',
+            'tipe' => 'required',
+            'supplier' => 'required',
             'harga_jual' => 'required'
         ]);
 
@@ -115,6 +124,9 @@ class BarangController extends Controller
         $barang = Barang::find($barang->id);
         $barang->nama_barang = $request->nama_barang;
         $barang->kode_barang = $request->kode_barang;
+        $barang->merk = $request->merk;
+        $barang->tipe = $request->tipe;
+        $barang->supplier = $request->supplier;
         $barang->harga_jual = $request->harga_jual;
 
         $updatebarang = $barang->save();

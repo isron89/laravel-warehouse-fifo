@@ -20,6 +20,7 @@
                     <th width="10px">No.</th>
                     <th>Nama Barang</th>
                     <th>Kode Barang</th>
+                    <th>Merk</th>
                     <th>Harga Jual</th>
                     <th>Aksi</th>
                 </tr>
@@ -31,6 +32,7 @@
                     <td>{{$key+1}}</td>
                     <td>{{$barangs->nama_barang}}</td>
                     <td>{{$barangs->kode_barang}}</td>
+                    <td>{{$barangs->merk}}</td>
                     <td>{{"Rp. ".number_format($barangs->harga_jual,0,".",".")}}</td>
                     <td>
                         <div class="row gx-6 gy-3">

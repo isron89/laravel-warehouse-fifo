@@ -23,6 +23,18 @@
                         <label for="kode_barang" class="fw-bold">Kode Barang</label>
                         <input type="text" class="form-control" id="kode_barang" name="kode_barang" placeholder="20230808">
                     </div>
+                    <div class="col-6">
+                        <label for="merk" class="fw-bold">Merk</label>
+                        <input type="text" class="form-control" id="merk" name="merk" placeholder="Keramik Sederhana">
+                    </div>
+                    <div class="col-6">
+                        <label for="tipe" class="fw-bold">Tipe</label>
+                        <input type="text" class="form-control" id="tipe" name="tipe" placeholder="Keramik Sederhana Tipe 1">
+                    </div>
+                    <div class="col-6">
+                        <label for="supplier" class="fw-bold">Supplier</label>
+                        <input type="text" class="form-control" id="supplier" name="supplier" placeholder="Supplier Sederhana">
+                    </div>
                 </div>
                 <div class="row mt-2 mb-3">
                     <div class="col-6">

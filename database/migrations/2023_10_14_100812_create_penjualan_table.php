@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('kode_penjualan')->unique();
             $table->date('tanggal');
             $table->foreignId('barang_id');
+            $table->foreignId('transaksi_id');
             $table->integer('jumlah');
             $table->integer('harga');
             $table->integer('total_harga');

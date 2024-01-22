@@ -7,10 +7,9 @@
 @endsection
 
 @section('content')
-<a href="{{route('penjualan.create')}}" class="btn btn-primary"><i class='bx bx-plus'></i> Tambah</a>
 <div class="card shadow mt-2">
     <div class="card-header" style="display: flex; justify-content: center;">
-        <h4 class="card-title">Daftar Transaksi Penjualan</h4>
+        <h5 class="card-title">Detail Transaksi - {{ $transaksi->kode_transaksi }}</h5>
     </div>
     <div class="card-body">
         @include('includes.flash')
@@ -19,22 +18,26 @@
                 <tr>
                     <th width="10px">No.</th>
                     <th>Tanggal Waktu Transaksi</th>
-                    <th>Kode Transaksi</th>
+                    <th>Kode Penjualan</th>
+                    <th>Kode Barang</th>
+                    <th>Nama Barang</th>
                     <th>Jumlah</th>
+                    <th>Harga</th>
                     <th>Total Harga</th>
-                    <th width="10px">Aksi</th>
                 </tr>
             </thead>
             <tbody>
-                @if (count($transaksi))
-                @foreach ($transaksi as $key => $tranksaksis )
+                @if (count($jual))
+                @foreach ($jual as $key => $jualan )
                 <tr>
                     <td>{{$key+1}}</td>
-                    <td>{{$tranksaksis->tanggal}}</td>
-                    <td>{{$tranksaksis->kode_transaksi}}</td>
-                    <td>{{$tranksaksis->jumlah}}</td>
-                    <td>{{"Rp. ".number_format($tranksaksis->total_harga,0,".",".")}}</td>
-                    <td><a href="{{route('penjualan.show', $tranksaksis->id)}}" class="btn btn-info btn-sm"><i class='bx bx-show'></i></a></td>
+                    <td>{{$jualan->tanggal}}</td>
+                    <td>{{$jualan->kode_penjualan}}</td>
+                    <td>{{$jualan->barang->kode_barang}}</td>
+                    <td>{{$jualan->barang->nama_barang}}</td>
+                    <td>{{$jualan->jumlah}}</td>
+                    <td>{{"Rp. ".number_format($jualan->harga,0,".",".")}}</td>
+                    <td>{{"Rp. ".number_format($jualan->total_harga,0,".",".")}}</td>
                 </tr>
                 @endforeach
                 @endif

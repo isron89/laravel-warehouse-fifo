@@ -34,6 +34,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('barang', BarangController::class);
     Route::resource('pembelian', PembelianController::class);
     Route::resource('penjualan', PenjualanController::class);
+    // Route::get('/penjualan/dashboard', [PenjualanController::class, 'dashboard'])->name('penjualan.dashboard');
 
     Route::resource('profile', ProfileController::class);
     Route::resource('user', UserController::class);

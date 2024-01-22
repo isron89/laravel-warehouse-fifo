@@ -22,5 +22,14 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('12345678'),
             'role' => 'admin'
         ]);
+
+        \App\Models\Barang::factory()->create([
+            'kode_barang' => '20230801',
+            'nama_barang' => 'Keramik 1',
+            'merk' => 'Keramik',
+            'tipe' => 'Keramik 1 Tipe 1',
+            'supplier' => 'Supplier 1',
+            'harga_jual' => 10000
+        ]);
     }
 }

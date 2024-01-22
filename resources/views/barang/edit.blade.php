@@ -24,6 +24,18 @@
                         <label for="kode_barang" class="fw-bold">Kode Barang</label>
                         <input type="text" class="form-control" id="kode_barang" name="kode_barang" value="{{$barang->kode_barang}}">
                     </div>
+                    <div class="col-6">
+                        <label for="merk" class="fw-bold">Merk</label>
+                        <input type="text" class="form-control" id="merk" name="merk" value="{{$barang->merk}}">
+                    </div>
+                    <div class="col-6">
+                        <label for="tipe" class="fw-bold">Tipe</label>
+                        <input type="text" class="form-control" id="tipe" name="tipe" value="{{$barang->tipe}}">
+                    </div>
+                    <div class="col-6">
+                        <label for="supplier" class="fw-bold">Supplier</label>
+                        <input type="text" class="form-control" id="supplier" name="supplier" value="{{$barang->supplier}}">
+                    </div>
                 </div>
                 <div class="row mt-2 mb-3">
                     <div class="col-6">

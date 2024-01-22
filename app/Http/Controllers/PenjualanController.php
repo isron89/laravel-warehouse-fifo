@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Penjualan;
 use App\Models\Barang;
+use App\Models\Transaksi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
@@ -19,13 +20,21 @@ class PenjualanController extends Controller
     public function index()
     {
         // $data = Penjualan::with('barang')->get();
-        $order = 'desc';
-        $data = Penjualan::join('barang', 'barang.id', '=', 'penjualan.barang_id')->orderBy('penjualan.tanggal', $order)->select('penjualan.*')->get();
 
+        $data = Transaksi::all();
         // dd($data);
-        $this->data['jual'] = $data;
-
+        $this->data['transaksi'] = $data;
         return view('penjualan.index', $this->data);
+    }
+
+    public function dashboard()
+    {
+        // $data = Penjualan::with('barang')->get();
+        $data = Transaksi::all();
+        // dd($data);
+        //dd($data);
+        $this->data['transaksi'] = $data;
+        return view('penjualan.dashboard-index', $this->data);
     }
 
     /**
@@ -35,9 +44,9 @@ class PenjualanController extends Controller
      */
     public function create()
     {
-        $databarang = Barang::select('barang.id', 'barang.nama_barang', 'barang.harga_jual', DB::raw('SUM(pembelian.current_stock) As stock'))
+        $databarang = Barang::select('barang.id', 'barang.nama_barang', 'barang.merk', 'barang.tipe', 'barang.harga_jual', DB::raw('NVL(SUM(pembelian.current_stock), 0) As stock'))
             ->leftJoin('pembelian', 'pembelian.barang_id', '=', 'barang.id')
-            ->groupBy('barang.id', 'barang.nama_barang', 'barang.harga_jual')
+            ->groupBy('barang.id', 'barang.nama_barang', 'barang.merk', 'barang.tipe', 'barang.harga_jual')
             ->get();
         $this->data['barangs'] = $databarang;
 
@@ -60,18 +69,28 @@ class PenjualanController extends Controller
                 'barang_id' => 'required',
                 'jumlah' => 'required',
                 'harga' => 'required',
-                'total_harga' => 'required'
             ]);
 
+            $transaksi = new Transaksi();
+            $transaksi->created_by = auth()->user()->email;
+            $transaksi->tanggal = date('Y-m-d');
+            $transaksi->kode_transaksi = "TRX-SELL-" . date('Ymd') . "-" . Str::random(5);
+            $transaksi->save();
+
+            $jumlah_barang = 0;
+            $total_harga = 0;
             for ($i = 0; $i < count($request->barang_id); $i++) {
                 $penjualan = new Penjualan();
+                $penjualan->transaksi_id = $transaksi->id;
                 $penjualan->barang_id = $request->barang_id[$i];
-                $penjualan->kode_penjualan = "SELL-" . date('Ymd') . "-" . $request->barang_id[$i] . "-" . Str::random(5);
+                // $penjualan->kode_penjualan = "SELL-" . date('Ymd') . "-" . $request->barang_id[$i] . "-" . Str::random(5);
+                $penjualan->kode_penjualan = $transaksi->kode_transaksi;
                 if (empty($request->jumlah[$i])) {
                     return redirect()->route('penjualan.create')->with('validationErrors', 'Jumlah barang tidak boleh kosong!');
                 } else {
                     $penjualan->jumlah = $request->jumlah[$i];
                 }
+                $jumlah_barang += $request->jumlah[$i];
 
                 if (empty($request->harga[$i])) {
                     return redirect()->route('penjualan.create')->with('validationErrors', 'Harga penjualan tidak boleh kosong!');
@@ -79,12 +98,9 @@ class PenjualanController extends Controller
                     $penjualan->harga = $request->harga[$i];
                 }
 
-                if (empty($request->total_harga[$i])) {
-                    return redirect()->route('penjualan.create')->with('validationErrors', 'Total harga tidak boleh kosong!');
-                } else {
-                    $penjualan->total_harga = $request->total_harga[$i];
-                }
+                $penjualan->total_harga = $request->harga[$i] * $request->jumlah[$i];
 
+                $total_harga += $penjualan->total_harga;
                 $penjualan->created_by = auth()->user()->email;
                 $penjualan->tanggal = date('Y-m-d');
 
@@ -93,11 +109,22 @@ class PenjualanController extends Controller
                 if ($this->state) {
                     $penjualan->save();
                     $this->state = true;
-                    return redirect()->route('penjualan.index')->with('success', 'Penjualan Barang berhasil ditambah!');
                 }
             }
-            return redirect()->route('penjualan.create');
+            // dd($total_harga);
+            // dd($jumlah_barang);
+
+
+            $transaksi->jumlah = $jumlah_barang;
+            $transaksi->total_harga = $total_harga;
+            if ($this->state) {
+                $transaksi->save();
+                $this->state = true;
+            }
+
+            return redirect()->route('penjualan.index')->with('success', 'Penjualan Barang berhasil ditambah!');
         } catch (\Exception $e) {
+            echo $e->getMessage();
             return redirect()->route('penjualan.create')->with('validationErrors', 'Cek kembali penjualan!');
         }
     }
@@ -133,9 +160,17 @@ class PenjualanController extends Controller
      * @param  \App\Models\Penjualan  $penjualan
      * @return \Illuminate\Http\Response
      */
-    public function show(Penjualan $penjualan)
+    public function show($id)
     {
-        //
+        $order = 'desc';
+        $data = Penjualan::join('barang', 'barang.id', '=', 'penjualan.barang_id')->orderBy('penjualan.tanggal', $order)->select('penjualan.*')->where('penjualan.transaksi_id', $id)->get();
+
+        // dd($data);
+        $transaksi = Transaksi::find($id);
+        $this->data['jual'] = $data;
+        $this->data['transaksi'] = $transaksi;
+
+        return view('penjualan.show', $this->data);
     }
 
     /**
